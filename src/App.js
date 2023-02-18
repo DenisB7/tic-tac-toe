@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 //import './App.css';
-import './style.css';
+//import './styles.css';
 /* function App() {
   return (
     <div className="App">
@@ -25,5 +25,17 @@ import './style.css';
 //export default App;
 
 export default function Square() {
-  return <button className="square">X</button>;
+  return (
+    <>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+    </>
+  );
 }
