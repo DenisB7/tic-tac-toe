@@ -1,7 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+//import logo from './logo.svg';
+//import './App.css';
+import './style.css';
+/* function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +20,10 @@ function App() {
       </header>
     </div>
   );
-}
+} */
 
-export default App;
+//export default App;
+
+export default function Square() {
+  return <button className="square">X</button>;
+}
