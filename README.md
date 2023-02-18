@@ -1,7 +1,7 @@
 # TIC-TAC-TOE
 I'm learning using new official tutorial https://beta.reactjs.org/ :
 - basic concepts (theory, assignments) are finished
-- now it is time to take some practice by creating this project
+- now it is time to take some practice by creating this React project
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
