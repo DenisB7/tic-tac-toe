@@ -31,7 +31,7 @@ function Board({ xIsNext, squares, onPlay }) {
   }
 
   let squaresBoard = []
-  const boards = []
+  let boards = []
   squares.forEach((square, index) => {
     squaresBoard.push(<Square key={index} value={squares[index]} onSquareClick={() => handleClick(index)} />)
     if (squaresBoard.length === 3) {
