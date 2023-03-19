@@ -53,6 +53,8 @@ export default function Game() {
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
+  const [toggleOrder, setToggleOrder] = useState(false);
+  console.log(toggleOrder);
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -64,7 +66,13 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((squares, move) => {
+/*   function toggleOrder(history) {
+    console.log(history)
+    setHistory(history.reverse());
+  } */
+
+  const lastMove = history.length - 1;
+  let moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
       description = 'Go to move #' + move;
@@ -72,10 +80,34 @@ export default function Game() {
       description = 'Go to game start';
     }
     if (move === currentMove && description !== 'Go to game start') {
+      if ((move === 1 && toggleOrder === false) || (move === lastMove && toggleOrder)) {
+        return (
+          <div key={move}>
+            <div style={{justifyContent: "center"}}>
+              <button onClick={() => setToggleOrder(toggleOrder ? false: true)} style={{fontWeight: "bold"}}>{'SORT ORDER'}</button>
+            </div>
+            <li>
+              <span>{'You are at move #'}{move}</span>
+            </li>
+          </div>
+        );
+      }
       return (
         <li key={move}>
           <span>{'You are at move #'}{move}</span>
         </li>
+      );
+    }
+    if ((move === 1 && toggleOrder === false) || (move === lastMove && toggleOrder)) {
+      return (
+        <div key={move}>
+          <div style={{justifyContent: "center"}}>
+            <button onClick={() => setToggleOrder(toggleOrder ? false: true)} style={{fontWeight: "bold"}}>{'SORT ORDER'}</button>
+          </div>
+          <li>
+            <button onClick={() => jumpTo(move)}>{description}</button>
+          </li>
+        </div>
       );
     }
     return (
@@ -84,7 +116,11 @@ export default function Game() {
       </li>
     );
   });
-
+  if (toggleOrder) {
+    let start = [moves[0]];
+    moves = moves.slice(1).reverse();
+    moves = [...start, ...moves];
+  }
   return (
     <div className="game">
       <div className="game-board">
