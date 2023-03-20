@@ -1,7 +1,7 @@
 # React project - TIC-TAC-TOE
 React practice project using new official tutorial https://beta.reactjs.org/ 
 
-Basic concepts of React (theory, coding assignments) are finished
+Beginners concepts of React (theory, coding assignments) are finished, now it is time to practice
 
 Updates:
 1. For the current move only, now it shows “You are at move #…” instead of a button
