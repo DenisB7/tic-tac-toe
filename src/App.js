@@ -27,7 +27,12 @@ function Board({ xIsNext, squares, onPlay }) {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    let draw = squares.every(element => element !== null);
+    if (draw === true) {
+      status = "Draw";
+    } else {
+      status = "Next player: " + (xIsNext ? "X" : "O");
+    }
   }
 
   let squaresBoard = []
@@ -54,7 +59,6 @@ export default function Game() {
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
   const [toggleOrder, setToggleOrder] = useState(false);
-  console.log(toggleOrder);
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
