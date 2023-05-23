@@ -1,5 +1,5 @@
 # React project - TIC-TAC-TOE
-React practice project using new official tutorial https://beta.reactjs.org/ 
+React practice project using new official tutorial https://react.dev/
 
 Beginners concepts of React (theory, coding assignments) are finished, now it is time to practice
 
