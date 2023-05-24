@@ -75,16 +75,20 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-/*   function toggleOrder(history) {
-    console.log(history)
-    setHistory(history.reverse());
-  } */
-
   const lastMove = history.length - 1;
+  var currentMoveIdentifier = {
+    "currentMoveRow": "",
+    "currentMoveColumn": "",
+  }
   let moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
       description = 'Go to move #' + move;
+      let currentMoveIndex = squares.findIndex((m, i) => m !== history[move-1][i]);
+      let currentMoveRow = currentMoveIndex < 3 ? 1: currentMoveIndex < 6 ? 2: 3;
+      let currentMoveColumn = currentMoveIndex < 3 ? currentMoveIndex + 1: (currentMoveIndex > 2 && currentMoveIndex < 6) ? currentMoveIndex - 2: currentMoveIndex - 5;
+      currentMoveIdentifier["currentMoveRow"] = currentMoveRow;
+      currentMoveIdentifier["currentMoveColumn"] = currentMoveColumn;
     } else {
       description = 'Go to game start';
     }
@@ -96,14 +100,18 @@ export default function Game() {
               <button onClick={() => setToggleOrder(toggleOrder ? false: true)} style={{fontWeight: "bold"}}>{'SORT ORDER'}</button>
             </div>
             <li>
-              <span>{'You are at move #'}{move}</span>
+              <span>{'You are at move #'}{move} </span>
+              <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
+              <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
             </li>
           </div>
         );
       }
       return (
         <li key={move}>
-          <span>{'You are at move #'}{move}</span>
+          <span>{'You are at move #'}{move} </span>
+          <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
+          <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
         </li>
       );
     }
@@ -114,14 +122,18 @@ export default function Game() {
             <button onClick={() => setToggleOrder(toggleOrder ? false: true)} style={{fontWeight: "bold"}}>{'SORT ORDER'}</button>
           </div>
           <li>
-            <button onClick={() => jumpTo(move)}>{description}</button>
+            <button onClick={() => jumpTo(move)}>{description} </button>
+            <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
+            <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
           </li>
         </div>
       );
     }
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+        <button onClick={() => jumpTo(move)}>{description} </button>
+        <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
+        <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
       </li>
     );
   });
