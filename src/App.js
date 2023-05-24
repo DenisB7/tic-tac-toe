@@ -81,7 +81,8 @@ export default function Game() {
     "currentMoveColumn": "",
   }
   let moves = history.map((squares, move) => {
-    let description;
+    var description;
+    var textOrButton;
     if (move > 0) {
       description = 'Go to move #' + move;
       let currentMoveIndex = squares.findIndex((m, i) => m !== history[move-1][i]);
@@ -92,48 +93,34 @@ export default function Game() {
     } else {
       description = 'Go to game start';
     }
-    if (move === currentMove && description !== 'Go to game start') {
-      if ((move === 1 && toggleOrder === false) || (move === lastMove && toggleOrder)) {
-        return (
-          <div key={move}>
-            <div style={{justifyContent: "center"}}>
-              <button onClick={() => setToggleOrder(toggleOrder ? false: true)} style={{fontWeight: "bold"}}>{'SORT ORDER'}</button>
-            </div>
-            <li>
-              <span>{'You are at move #'}{move} </span>
-              <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
-              <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
-            </li>
-          </div>
-        );
-      }
-      return (
-        <li key={move}>
-          <span>{'You are at move #'}{move} </span>
-          <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
-          <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
-        </li>
-      );
-    }
     if ((move === 1 && toggleOrder === false) || (move === lastMove && toggleOrder)) {
+      if (move === currentMove && description !== 'Go to game start') {
+        textOrButton = <span>{'You are at move #'}{move} </span>;
+      } else {
+        textOrButton = <button onClick={() => jumpTo(move)}>{description} </button>;
+      }
       return (
         <div key={move}>
           <div style={{justifyContent: "center"}}>
             <button onClick={() => setToggleOrder(toggleOrder ? false: true)} style={{fontWeight: "bold"}}>{'SORT ORDER'}</button>
           </div>
           <li>
-            <button onClick={() => jumpTo(move)}>{description} </button>
+            {textOrButton}
             <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
             <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
           </li>
         </div>
       );
+    } else if (move === currentMove && description !== 'Go to game start') {
+      textOrButton = <span>{'You are at move #'}{move} </span>;
+    } else {
+      textOrButton = <button onClick={() => jumpTo(move)}>{description} </button>;
     }
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description} </button>
-        <span>{"Row"} {currentMoveIdentifier["currentMoveRow"]} </span>
-        <span>{"Column"} {currentMoveIdentifier["currentMoveColumn"]}</span>
+        {textOrButton}
+        <span>{currentMoveIdentifier["currentMoveRow"] ? "Row": ""} {currentMoveIdentifier["currentMoveRow"]} </span>
+        <span>{currentMoveIdentifier["currentMoveColumn"] ? "Column": ""} {currentMoveIdentifier["currentMoveColumn"]}</span>
       </li>
     );
   });
